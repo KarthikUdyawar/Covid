@@ -2,7 +2,7 @@
 
 import pandas as pd
 import numpy as np
-df = pd.read_excel('Database.xlsx')
+df = pd.read_csv('Database.csv')
 
 # Database
 
