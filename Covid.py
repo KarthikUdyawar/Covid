@@ -31,8 +31,15 @@ def loss(actual, predicted):
 	sum_square_error = 0.0
 	for i in range(len(actual)):
 		sum_square_error += (actual[i] - predicted[i])**2.0
-	mean_square_error = np.round(1.0 / len(actual) * sum_square_error,6)
+	mean_square_error = np.round(1.0 / len(actual) * sum_square_error,5)
 	return mean_square_error
+    
+def accuracy(actual, predicted):
+	correct = 0
+	for i in range(len(actual)):
+		if (abs(actual[i] - predicted[i])) < 1e-2:
+			correct += 1
+	return correct / float(len(actual)) * 100.0
 
 '''Nodes'''
 
@@ -78,7 +85,7 @@ for i in range(iteration):
     l1_delta = l1_error * d_sigmoid(l1) * learning_rate
     
     if (i % (iteration/10)) == 0:
-        print('Epoch: ' + str(int(i/10000)) + '/10 -- Loss: ' + str(float(loss(y,l3))))
+        print('Epoch: ' + str(int(i/10000)) + '/10 -- Loss: ' + str(float(loss(y,l3))) + ' -- Acc: ' + str(float(accuracy(y,l3))))
         
     # Correction
 
