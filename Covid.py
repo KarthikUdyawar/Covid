@@ -2,12 +2,17 @@
 
 import pandas as pd
 import numpy as np
+
+import time
+import sys
+
+animation = ["[■□□□□□□□□□]","[■■□□□□□□□□]", "[■■■□□□□□□□]", "[■■■■□□□□□□]", "[■■■■■□□□□□]", "[■■■■■■□□□□]", "[■■■■■■■□□□]", "[■■■■■■■■□□]", "[■■■■■■■■■□]", "[■■■■■■■■■■]"]
 df = pd.read_csv('Database.csv')
 
 # Database
 
 x = np.array(df.iloc[:, 0:11].values)
-y = np.array(df.iloc[:, 11:12].values)
+y = np.array(df.iloc[:, 11:12].values) 
 
 # Function
 
@@ -85,7 +90,14 @@ for i in range(iteration):
     l1_delta = l1_error * d_sigmoid(l1) * learning_rate
     
     if (i % (iteration/10)) == 0:
-        print('Epoch: ' + str(int(i/10000)) + '/10 -- Loss: ' + str(float(loss(y,l3))) + ' -- Acc: ' + str(float(accuracy(y,l3))))
+    
+        for a in range(10):
+            time.sleep(0.1)
+            sys.stdout.write("\r" + animation[a % len(animation)])
+            sys.stdout.flush()
+            
+        print(' Epoch: ' + str(int(i/10000)) + '/10 -- Loss: ' + str(float(loss(y,l3))) + ' -- Acc: ' + str(float(accuracy(y,l3))))
+        
         
     # Correction
 
